@@ -1,26 +1,24 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <header>
       <h2>Welcome to our Weather Station Website</h2>
     </header>
     <p>You can check the statistics of your area.</p>
-    <table align = "center">
+    <table align="center">
       <tr>
         <th>Date and Time</th>
         <th>Longitude</th>
         <th>Latitude</th>
         <th><a href="#tem">Temperature</a></th>
         <th><a href="#co">Carbon Monoxide</a></th>
-        <th><a href="#gas">Humidity</a></th>
+        <th><a href="#hum">Humidity</a></th>
         <th><a href="#air">Air Pressure</a></th>
-        <th><a href="#sun">Brightness</a></th>
+        <th><a href="#bri">Brightness</a></th>
       </tr>
       <tr v-for="(row, idx) in data" :key="`row-${idx}`">
         <td>{{formatDateTime(row.datetime)}}</td>
-        <td>{{row.longitude}}</td>
-        <td>{{row.latitude}}</td>
+        <td>{{cutDecimals(row.longitude, 2)}}</td>
+        <td>{{cutDecimals(row.latitude, 2)}}</td>
         <td>{{row.temperature}}</td>
         <td>{{row.carbonmonoxide}}</td>
         <td>{{row.humidity}}</td>
@@ -28,19 +26,24 @@
         <td>{{row.brightness}}</td>
       </tr>
     </table>
-    
-    <div>
-        <h4 id ="tem">Temperatur</h4>
-          <p>We used a Temperatur Sensor to measure it.<br>
-           The Esp is able to measure it with a build-in Sensor, but you can distort it easilly. 
+
+    <div class="text">
+        <h4 id ="tem">Temperature</h4>
+          <p>We used a "DHT11 Temperature & Humidity Sensor Module" to measure it.<br>
+           The Esp32 is able to measure it with a build-in Sensor, but you can distort it easilly.
+           You can also measure the air humidity. 
+          </p>
         <h4 id = "co">Carbon Monoxide</h4>
-        <h4 id = "gas">Gas Smoke</h4>
+          <p>For measuring the Carbon Monoxide in the air, we used the "MQ-7 CO Carbon MonoxideDetector Sensor Modeule".</p>
+        <h4 id = "hum">Gas Smoke</h4>
+          <p>With the "MQ-2 Gas Smoke Sensor Module"</p>
         <h4 id = "air">Air Pressure</h4>
-        <h4 id = "sun">Sun Light</h4>
+          <p>"BMP180 Digital Barometric Pressure Sensor Module"</p>
+        <h4 id = "bri">Sun Light</h4>
+          <p>"Photosensitive Light Sensor Module"</p>
     </div>
+    <p><br></p>
   </div> 
- 
-  
 </template>
 
 <script>
@@ -58,8 +61,8 @@ export default {
       validateStatus: () => true,
     })
 
-    if(res.status == 200) {
-      this.data = res.data
+    if(res.status == 200 && Array.isArray(res.data)) {
+      this.data = res.data.sort((o1, o2) => o1.datetime - o2.datetime)
       console.log(this.data)
     } else {
         console.error(res.data)
@@ -68,10 +71,14 @@ export default {
   methods: {
       formatDateTime(datetime) {
         let date = new Date(datetime)
-        return `${date.getFullYear()}/${this.padDigits(date.getMonth(), 2)}/${this.padDigits(date.getDay(), 2)} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+
+        return `${date.getFullYear()}/${this.padDigits(date.getMonth()+1, 2)}/${this.padDigits(date.getDate(), 2)} ${this.padDigits(date.getHours(), 2)}:${this.padDigits(date.getMinutes(), 2)}:${this.padDigits(date.getSeconds(), 2)}`
       },
       padDigits(number, digits) {
         return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+      },
+      cutDecimals(str, digits) {
+        return str.slice(0, str.indexOf(".")+digits+1)
       }
   }
 }
@@ -81,36 +88,67 @@ export default {
 </script>
 
 <style lang="scss">
+html {
+  scroll-behavior: smooth;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border: 2px, solid, rgba(236, 236, 235, 0.705);
+  background: rgba(236, 236, 235, 0.705);
+  border-radius: 4px;
 }
 
-h2 {
-  color: black;
+header {
+  color: white;
   border: 2px, solid, rgba(104, 152, 243, 0.726);
   border-radius: 4px;
   background-color: rgba(104, 152, 243, 0.726);
+  border-width: 20%;
 }
 
 a {
-  color: #2c3e50;
+  color: white;
   text-decoration: none;
 }
 
-table {
-  color: #2c3e50;
-  border: 2px, solid, rgba(255, 251, 44, 0.692);
+th {
+  color: white;
+  border: 2px, solid, #2c3e50;
   border-radius: 4px;
-  background-color: rgba(255, 251, 44, 0.692);
+  border-width: 20%;
+  background-color: #2c3e50;
+  padding: 4px;
 }
-tr,
 td {
   border: 1px solid #2c3e50;
+  background-color: white;
   border-collapse: collapse;
+}
+h4 {
+  color: white;
+  border: 2px, solid, rgba(104, 152, 243, 0.726);
+  border-radius: 4px;
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: rgba(104, 152, 243, 0.726);
+}
+
+.text {
+  border: 2px, hidden, rgba(104, 152, 243, 0.726);
+  background-color: white;
+  border-radius: 4px;
+  height: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: center;
+  padding-bottom: 2px;
 }
 </style>
