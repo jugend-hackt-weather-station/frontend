@@ -1,9 +1,16 @@
 <template>
-  <div id="app">
+<div id="app">
+  <div class="topnav">
+    <a href="#tem">Temperature | </a>
+    <a href="#co">Carbon Monoxide | </a>
+    <a href="#hum">Humidity | </a>
+    <a href="#air">Air Pressure | </a>
+    <a href="#bri">Brightness</a>
+  </div>
     <header>
-      <h2>Welcome to our Weather Station Website</h2>
+      <h2>Welcome to Open Weather Station</h2>
     </header>
-    <p>You can check the statistics of your area.</p>
+    <p>Here you can check the statistics from your Open Weather Station.</p>
     <table align="center">
       <tr>
         <th>Date and Time</th>
@@ -35,11 +42,11 @@
           </p>
         <h4 id = "co">Carbon Monoxide</h4>
           <p>For measuring the Carbon Monoxide in the air, we used the "MQ-7 CO Carbon MonoxideDetector Sensor Modeule".</p>
-        <h4 id = "hum">Gas Smoke</h4>
+        <h4 id = "hum">Humidity</h4>
           <p>With the "MQ-2 Gas Smoke Sensor Module"</p>
         <h4 id = "air">Air Pressure</h4>
           <p>"BMP180 Digital Barometric Pressure Sensor Module"</p>
-        <h4 id = "bri">Sun Light</h4>
+        <h4 id = "bri">Brightness</h4>
           <p>"Photosensitive Light Sensor Module"</p>
     </div>
     <p><br></p>
@@ -61,8 +68,8 @@ html {
   color: #2c3e50;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left:10%;
-  margin-right: 10%;
+  margin-left:5%;
+  margin-right: 5%;
   border: 2px, solid, rgba(236, 236, 235, 0.705);
   background: rgba(236, 236, 235, 0.705);
   border-radius: 4px;
@@ -114,4 +121,15 @@ h4 {
   text-align: center;
   padding-bottom: 2px;
 }
+
+.topnav{
+  border: 2px, solid, #2c3e50;
+  background: #2c3e50;
+  border-radius: 4px;
+  background-color: #2c3e50;
+  color:white;
+  font-weight: bold;
+  padding: 2px;
+}
+
 </style>
