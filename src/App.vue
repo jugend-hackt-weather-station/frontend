@@ -11,6 +11,32 @@
       <h2>Welcome to Open Weather Station</h2>
     </header>
     <p>Here you can check the statistics from your Open Weather Station.</p>
+
+    <h5>Station 1</h5><br>
+    <table align="center">
+      <tr>
+        <th>Date and Time</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th><a href="#tem">Temperature</a></th>
+        <th><a href="#co">Carbon Monoxide</a></th>
+        <th><a href="#hum">Humidity</a></th>
+        <th><a href="#air">Air Pressure</a></th>
+        <th><a href="#bri">Brightness</a></th>
+      </tr>
+      <tr v-for="(row, idx) in data" :key="`row-${idx}`">
+        <td>{{formatDateTime(row.datetime)}}</td>
+        <td>{{cutDecimals(row.longitude, 2)}}</td>
+        <td>{{cutDecimals(row.latitude, 2)}}</td>
+        <td>{{row.temperature}}</td>
+        <td>{{row.carbonmonoxide}}</td>
+        <td>{{row.humidity}}</td>
+        <td>{{row.pressure}}</td>
+        <td>{{row.brightness}}</td>
+      </tr>
+    </table>
+
+    <h5>Station 2</h5><br>
     <table align="center">
       <tr>
         <th>Date and Time</th>
@@ -154,6 +180,18 @@ h4 {
   margin-right: 20%;
   text-align: center;
   padding-bottom: 2px;
+}
+
+h5 {
+  font-weight: bold;
+  border: 2px, solid, white;
+  background-color: white;
+  border-radius: 4px;
+  margin-left: 20%;
+  margin-right: 20%;
+  text-align: center;
+  padding-bottom: 2px;
+  margin-bottom: -1%;
 }
 
 .topnav {
