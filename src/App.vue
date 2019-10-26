@@ -69,7 +69,8 @@
         <h4 id = "co">Carbon Monoxide</h4>
           <p>For measuring the Carbon Monoxide in the air, we used the "MQ-7 CO Carbon MonoxideDetector Sensor Modeule".</p>
         <h4 id = "hum">Humidity</h4>
-          <p>With the "MQ-2 Gas Smoke Sensor Module"</p>
+        h4>
+          <p>"MQ-2 Gas Smoke Sensor Module"</p>
         <h4 id = "air">Air Pressure</h4>
           <p>"BMP180 Digital Barometric Pressure Sensor Module"</p>
         <h4 id = "bri">Brightness</h4>
