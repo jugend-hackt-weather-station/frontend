@@ -9,7 +9,7 @@
     <table align = "center">
       <tr>
         <th>Time</th>
-        <th><a href="#tem">Temperatur</a></th>
+        <th><a href="#tem">Temperature</a></th>
         <th><a href="#co">Carbon Monoxide</a></th>
         <th><a href="#gas">Gas Smoke</a></th>
         <th><a href="#air">Air Pressure</a></th>
@@ -26,13 +26,19 @@
     </table>
     
     <div>
-        <h4 id ="tem">Temperatur</h4>
-          <p>We used a Temperatur Sensor to measure it.<br>
-           The Esp is able to measure it with a build-in Sensor, but you can distort it easilly. 
+        <h4 id ="tem">Temperature</h4>
+          <p>We used a "DHT11 Temperature & Humidity Sensor Module" to measure it.<br>
+           The Esp32 is able to measure it with a build-in Sensor, but you can distort it easilly.
+           You can also measure the air humidity. 
+          </p>
         <h4 id = "co">Carbon Monoxide</h4>
+          <p>For measuring the Carbon Monoxide in the air, we used the "MQ-7 CO Carbon MonoxideDetector Sensor Modeule".</p>
         <h4 id = "gas">Gas Smoke</h4>
+          <p>With the "MQ-2 Gas Smoke Sensor Module"</p>
         <h4 id = "air">Air Pressure</h4>
+          <p>"BMP180 Digital Barometric Pressure Sensor Module"</p>
         <h4 id = "sun">Sun Light</h4>
+          <p>"Photosensitive Light Sensor Module"</p>
     </div>
   </div> 
  
@@ -63,7 +69,7 @@ export default {
   margin-top: 40px;
 }
 
-h2 {
+header {
   color: black;
   border: 2px, solid, rgba(104, 152, 243, 0.726);
   border-radius: 4px;
