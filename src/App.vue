@@ -27,7 +27,7 @@
       </tr>
     </table>
 
-    <div>
+    <div class="text">
         <h4 id ="tem">Temperature</h4>
           <p>We used a "DHT11 Temperature & Humidity Sensor Module" to measure it.<br>
            The Esp32 is able to measure it with a build-in Sensor, but you can distort it easilly.
@@ -42,23 +42,11 @@
         <h4 id = "bri">Sun Light</h4>
           <p>"Photosensitive Light Sensor Module"</p>
     </div>
+    <p><br></p>
   </div> 
- 
-  
 </template>
 
 <script>
-/*import HelloWorld from './components/HelloWorld.vue'
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}*/
-
-  function temperatur(){
-
-  }
 </script>
 
 <style lang="scss">
@@ -71,9 +59,13 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left:10%;
   margin-right: 10%;
+  border: 2px, solid, rgba(236, 236, 235, 0.705);
+  background: rgba(236, 236, 235, 0.705);
+  border-radius: 4px;
   
 }
 
@@ -100,6 +92,7 @@ th {
 }
 td{
   border: 1px solid #2c3e50;
+  background-color: white;
   border-collapse: collapse;
 }
 h4 {
@@ -109,13 +102,16 @@ h4 {
   margin-left: 20%;
   margin-right: 20%;
   background-color: rgba(104, 152, 243, 0.726);
-  border-radius: 4px;
 }
 
-p {
+.text {
   border: 2px, hidden, rgba(104, 152, 243, 0.726);
+  background-color: white;
+  border-radius: 4px;
+  height: 10%;
   margin-left: 20%;
   margin-right: 20%;
   text-align: center;
+  padding-bottom: 2px;
 }
 </style>
