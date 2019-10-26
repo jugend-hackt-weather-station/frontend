@@ -22,15 +22,15 @@
         <th><a href="#air">Air Pressure</a></th>
         <th><a href="#bri">Brightness</a></th>
       </tr>
-      <tr>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
-        <td>test</td>
+      <tr v-for="(row, idx) in data" :key="`row-${idx}`">
+        <td>{{formatDateTime(row.datetime)}}</td>
+        <td>{{cutDecimals(row.longitude, 2)}}</td>
+        <td>{{cutDecimals(row.latitude, 2)}}</td>
+        <td>{{row.temperature}}</td>
+        <td>{{row.carbonmonoxide}}</td>
+        <td>{{row.humidity}}</td>
+        <td>{{row.pressure}}</td>
+        <td>{{row.brightness}}</td>
       </tr>
     </table>
 
@@ -54,6 +54,41 @@
 </template>
 
 <script>
+export default {
+  name: 'app',
+  data() {
+    return {
+        data: []
+    }
+  },
+  async created() {
+    const res = await axios({
+      method: 'get',
+      url: "http://localhost:5000/getAll",
+      validateStatus: () => true,
+    })
+
+    if(res.status == 200 && Array.isArray(res.data)) {
+      this.data = res.data.sort((o1, o2) => o1.datetime - o2.datetime)
+      console.log(this.data)
+    } else {
+        console.error(res.data)
+    }
+  },
+  methods: {
+      formatDateTime(datetime) {
+        let date = new Date(datetime)
+
+        return `${date.getFullYear()}/${this.padDigits(date.getMonth()+1, 2)}/${this.padDigits(date.getDate(), 2)} ${this.padDigits(date.getHours(), 2)}:${this.padDigits(date.getMinutes(), 2)}:${this.padDigits(date.getSeconds(), 2)}`
+      },
+      padDigits(number, digits) {
+        return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+      },
+      cutDecimals(str, digits) {
+        return str.slice(0, str.indexOf(".")+digits+1)
+      }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -61,19 +96,18 @@ html {
   scroll-behavior: smooth;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left:5%;
+  margin-left: 5%;
   margin-right: 5%;
   border: 2px, solid, rgba(236, 236, 235, 0.705);
   background: rgba(236, 236, 235, 0.705);
   border-radius: 4px;
-  
 }
 
 header {
@@ -85,8 +119,8 @@ header {
 }
 
 a {
-    color :white;
-    text-decoration: none;
+  color: white;
+  text-decoration: none;
 }
 
 th {
@@ -95,9 +129,9 @@ th {
   border-radius: 4px;
   border-width: 20%;
   background-color: #2c3e50;
-  padding:4px;
+  padding: 4px;
 }
-td{
+td {
   border: 1px solid #2c3e50;
   background-color: white;
   border-collapse: collapse;
@@ -122,14 +156,13 @@ h4 {
   padding-bottom: 2px;
 }
 
-.topnav{
+.topnav {
   border: 2px, solid, #2c3e50;
   background: #2c3e50;
   border-radius: 4px;
   background-color: #2c3e50;
-  color:white;
+  color: white;
   font-weight: bold;
   padding: 2px;
 }
-
 </style>
