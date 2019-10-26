@@ -8,20 +8,24 @@
     <p>You can check the statistics of your area.</p>
     <table align = "center">
       <tr>
-        <th>Time</th>
+        <th>Date and Time</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
         <th><a href="#tem">Temperature</a></th>
         <th><a href="#co">Carbon Monoxide</a></th>
-        <th><a href="#gas">Gas Smoke</a></th>
+        <th><a href="#gas">Humidity</a></th>
         <th><a href="#air">Air Pressure</a></th>
-        <th><a href="#sun">Sun Light</a></th>
+        <th><a href="#sun">Brightness</a></th>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr v-for="(row, idx) in data" :key="`row-${idx}`">
+        <td>{{formatDateTime(row.datetime)}}</td>
+        <td>{{row.longitude}}</td>
+        <td>{{row.latitude}}</td>
+        <td>{{row.temperature}}</td>
+        <td>{{row.carbonmonoxide}}</td>
+        <td>{{row.humidity}}</td>
+        <td>{{row.pressure}}</td>
+        <td>{{row.brightness}}</td>
       </tr>
     </table>
     
@@ -53,15 +57,27 @@ export default {
       url: "http://localhost:5000/getAll",
       validateStatus: () => true,
     })
+
     if(res.status == 200) {
-        this.data = res.data
-    }    
+      this.data = res.data
+      console.log(this.data)
+    } else {
+        console.error(res.data)
+    }
+  },
+  methods: {
+      formatDateTime(datetime) {
+        let date = new Date(datetime)
+        return `${date.getFullYear()}/${this.padDigits(date.getMonth(), 2)}/${this.padDigits(date.getDay(), 2)} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+      },
+      padDigits(number, digits) {
+        return Array(Math.max(digits - String(number).length + 1, 0)).join(0) + number;
+      }
   }
 }
 
-  function temperatur(){
 
-  }
+
 </script>
 
 <style lang="scss">
