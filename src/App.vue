@@ -9,7 +9,7 @@
     <table align = "center">
       <tr>
         <th>Time</th>
-        <th><a href="#tem">Temperatur</a></th>
+        <th><a href="#tem">Temperature</a></th>
         <th><a href="#co">Carbon Monoxide</a></th>
         <th><a href="#gas">Gas Smoke</a></th>
         <th><a href="#air">Air Pressure</a></th>
@@ -40,13 +40,24 @@
 </template>
 
 <script>
-/*import HelloWorld from './components/HelloWorld.vue'
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data() {
+    return {
+        data: []
+    }
+  },
+  async created() {
+    const res = await axios({
+      method: 'get',
+      url: "http://localhost:5000/getAll",
+      validateStatus: () => true,
+    })
+    if(res.status == 200) {
+        this.data = res.data
+    }    
   }
-}*/
+}
 
   function temperatur(){
 
@@ -55,7 +66,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -71,8 +82,8 @@ h2 {
 }
 
 a {
-    color :#2c3e50;
-    text-decoration: none;
+  color: #2c3e50;
+  text-decoration: none;
 }
 
 table {
@@ -81,9 +92,9 @@ table {
   border-radius: 4px;
   background-color: rgba(255, 251, 44, 0.692);
 }
-tr, td{
+tr,
+td {
   border: 1px solid #2c3e50;
   border-collapse: collapse;
-  }
-
+}
 </style>
