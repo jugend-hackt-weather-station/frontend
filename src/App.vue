@@ -42,13 +42,16 @@
           </p>
         <h4 id = "hum">Humidity</h4>
           <p>"DHT11 Temperature & Humidity Sensor Module".<br>
+
           </p>
         <h4 id = "co">Carbon Monoxide</h4>
           <p>For measuring the Carbon Monoxide in the air, we used the "MQ-7 CO Carbon MonoxideDetector Sensor Modeule".</p>
         <h4 id = "air">Air Pressure</h4>
-          <p>"BMP180 Digital Barometric Pressure Sensor Module"</p>
+          <p>"BMP180 Digital Barometric Pressure Sensor Module"<br>
+             It measures the air pressure in Pascal.</p>
         <h4 id = "bri">Brightness</h4>
-          <p>"Photosensitive Light Sensor Module"</p>
+          <p>"Photosensitive Light Sensor Module"<br>
+             It measures how much sunlight it is today.</p>     
     </div>
     <p><br></p>
   </div> 
