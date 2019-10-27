@@ -17,8 +17,8 @@
         <th>Longitude</th>
         <th>Latitude</th>
         <th><a href="#tem">Temperature</a></th>
-        <th><a href="#co">Carbon Monoxide</a></th>
         <th><a href="#hum">Humidity</a></th>
+        <th><a href="#co">Carbon Monoxide</a></th>
         <th><a href="#air">Air Pressure</a></th>
         <th><a href="#bri">Brightness</a></th>
       </tr>
@@ -27,8 +27,8 @@
         <td>{{cutDecimals(row.longitude, 2)}}</td>
         <td>{{cutDecimals(row.latitude, 2)}}</td>
         <td>{{row.temperature}}</td>
-        <td>{{row.carbonmonoxide}}</td>
         <td>{{row.humidity}}</td>
+        <td>{{row.carbonmonoxide}}</td>
         <td>{{row.pressure}}</td>
         <td>{{row.brightness}}</td>
       </tr>
@@ -37,13 +37,14 @@
     <div class="text">
         <h4 id ="tem">Temperature</h4>
           <p>We used a "DHT11 Temperature & Humidity Sensor Module" to measure it.<br>
-           The Esp32 is able to measure it with a build-in Sensor, but you can distort it easilly.
-           You can also measure the air humidity. 
+           The Esp32 is able to measure it with a build-in Sensor, but you can distort it easilly.<br>
+           We used the same Sensor for Humidity and for Temperatur.
+          </p>
+        <h4 id = "hum">Humidity</h4>
+          <p>"DHT11 Temperature & Humidity Sensor Module".<br>
           </p>
         <h4 id = "co">Carbon Monoxide</h4>
           <p>For measuring the Carbon Monoxide in the air, we used the "MQ-7 CO Carbon MonoxideDetector Sensor Modeule".</p>
-        <h4 id = "hum">Humidity</h4>
-          <p>With the "MQ-2 Gas Smoke Sensor Module"</p>
         <h4 id = "air">Air Pressure</h4>
           <p>"BMP180 Digital Barometric Pressure Sensor Module"</p>
         <h4 id = "bri">Brightness</h4>
